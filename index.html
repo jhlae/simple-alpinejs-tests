@@ -1,0 +1,29 @@
+<html lang="en">
+<meta charset="utf-8">
+<head>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        [x-cloak] { display: none; }
+    </style>
+</head>
+<body>
+    <div x-cloak x-data="{ open: false }"><button @click="open = ! open">Toggle</button>
+        <div x-show="open" @click.outside="open = false" x-transition.opacity>Hidden content</div>
+    </div>
+    <br />
+    <div x-cloak x-data>
+        <button @click="$store.tabs.current = 'First tab'">First Tab</button>
+        <button @click="$store.tabs.current = 'Second tab'">Second Tab</button>
+        <button @click="$store.tabs.current = 'Third tab'">Third Tab</button>
+        <p x-cloak x-text="$store.tabs.current"></p>
+    </div>
+
+    <script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.store('tabs', {
+            current: '',
+        })
+    })
+    </script>
+</body>
+</html>
